@@ -22,19 +22,11 @@ public class CalendarEntry {
         return date;
     }
 
-    //Effects:Sets the date of the entry.
-    public void setDate(Date date) {
-        this.date = date;
-    }
 
     //Effects: Gets the content of the entry
     public String getContent() {
         return content;
     }
 
-    //Effects: Sets the content of the entry to the specified content.
-    public void setContent(String content) {
-        this.content = content;
-    }
 }
 
