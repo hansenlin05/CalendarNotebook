@@ -1,15 +1,15 @@
 package model;
 
-//Representes a dates
+//Represents a date with day, month, and year components.
 public class Date {
     private int day;
     private int month;
     private int year;
 
     public Date(int day, int month, int year) {
-        this.day = day;
-        this.month = month;
-        this.year = year;
+        setDay(day);
+        setMonth(month);
+        setYear(year);
     }
 
     // Effects: Returns the day of the date.
@@ -22,6 +22,7 @@ public class Date {
     public void setDay(int day) {
         this.day = day;
     }
+
 
     // Effects: Returns the month of the date.
     public int getMonth() {
@@ -43,5 +44,17 @@ public class Date {
     // Effects: Sets the year of the date to the specified year.
     public void setYear(int year) {
         this.year = year;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Date date = (Date) obj;
+        return day == date.day && month == date.month && year == date.year;
     }
 }

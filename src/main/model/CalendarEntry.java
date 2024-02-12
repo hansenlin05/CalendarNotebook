@@ -3,9 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Represents an entry in the calendar notebook.
- */
+ //Represents an entry in the calendar notebook.
+
 public class CalendarEntry {
     private Date date;
     private String content;

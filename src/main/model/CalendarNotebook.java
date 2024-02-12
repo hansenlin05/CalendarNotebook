@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+//Represents a calendar notebook containing entries for various dates.
 public class CalendarNotebook {
     private List<CalendarEntry> entries;
 
