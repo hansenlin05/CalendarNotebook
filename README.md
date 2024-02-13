@@ -9,7 +9,10 @@ With the development of society, more and more people rely on laptops to work an
 # *User Stories* 
 - As a **user**, I would like to be able to enter the contents of a record on any given date. 
 - As a **user**, I would like to be able to view what was recorded on any date for a particular date. 
-- As a **user**, I want to be able to delete logs for a certain date As a user, I want the log to be saved as a local file 
+- As a **user**, I want to be able to delete logs for a certain date 
+- As a **user**, I want to be able to quit the notebook.
+- As a **user**, I want the log to be saved as a local file 
 - As a **user**, I want to be able to load the log file when I open the log notebook.
+
 
  

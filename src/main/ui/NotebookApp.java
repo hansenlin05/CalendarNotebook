@@ -3,7 +3,6 @@ package ui;
 import model.CalendarEntry;
 import model.CalendarNotebook;
 import model.Date;
-import model.exceptions.EmptyDateException;
 
 import java.util.List;
 import java.util.Scanner;
@@ -12,34 +11,36 @@ public class NotebookApp {
     private CalendarNotebook notebook;
     private Scanner scanner;
 
-
+    // CalendarNotebook application
     public NotebookApp() {
         notebook = new CalendarNotebook();
         scanner = new Scanner(System.in);
         runNotebook();
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes user Console input menu
     private void runNotebook() {
-        boolean keepGoing = true;
-        String command = null;
+        boolean keepRunning = true;
+        String input = null;
 
-        while (keepGoing) {
+        while (keepRunning) {
             displayMenu();
-            command = scanner.next();
-            command = command.toLowerCase();
+            input = scanner.next();
+            input = input.toLowerCase();
 
-            if (command.equals("q")) {
-                keepGoing = false;
+            if (input.equals("q")) {
+                keepRunning = false;
             } else {
-                processCommand(command);
+                processInput(input);
             }
         }
         System.out.println("\nThank you for using Calendar Notebook and we look forward to working with you again!");
     }
 
     // MODIFIES: this
-    // EFFECTS: processes user command
-    private void processCommand(String command) {
+    // EFFECTS: processes user input command
+    private void processInput(String command) {
         if (command.equals("a")) {
             addEntry();
         } else if (command.equals("v")) {
@@ -61,6 +62,7 @@ public class NotebookApp {
         System.out.print("Enter your choice below: ");
     }
 
+    // MODIFIES: this
     // EFFECTS: prompts the user to enter date and content for a new entry, then adds it to the notebook
     private void addEntry() {
         System.out.println("Enter date (day month year): ");
@@ -77,20 +79,20 @@ public class NotebookApp {
         notebook.addEntry(entry);
         System.out.println("Entry added successfully!");
 
-        // Debugging: Print out all entries in the notebook
         System.out.println("Entries in notebook:");
         for (CalendarEntry e : notebook.getEntriesForDate(date)) {
             System.out.println(e.getDate() + " - " + e.getContent());
         }
     }
 
+    // MODIFIES: this
     // EFFECTS: prompts the user to enter a date, then displays entries for that date
     private void viewEntriesForDate() {
         System.out.println("Enter date to view entries (day month year): ");
         int day = scanner.nextInt();
         int month = scanner.nextInt();
         int year = scanner.nextInt();
-        scanner.nextLine();  // Consume newline character
+        scanner.nextLine();
 
         Date date = new Date(day, month, year);
 
@@ -105,6 +107,7 @@ public class NotebookApp {
         }
     }
 
+    //MODIFIES: this
     // EFFECTS: prompts the user to enter a date and content of entry to delete, then deletes it from the notebook
     private void deleteEntry() {
         System.out.println("Enter date of entry to delete (day month year): ");

@@ -1,10 +1,6 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
-
  //Represents an entry in the calendar notebook.
-
 public class CalendarEntry {
     private Date date;
     private String content;
@@ -28,5 +24,9 @@ public class CalendarEntry {
         return content;
     }
 
+    //EFFECTS: returns a string representation of content
+    public String toString() {
+        return content;
+    }
 }
 

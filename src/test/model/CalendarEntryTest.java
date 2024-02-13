@@ -17,4 +17,9 @@ public class CalendarEntryTest {
         CalendarEntry entry = new CalendarEntry(new Date(10, 2, 2024), "Meeting");
         assertEquals("Meeting", entry.getContent());
     }
+    @Test
+    public void testToString() {
+        CalendarEntry entry = new CalendarEntry(new Date(10, 2, 2024), "Meeting");
+        assertEquals("Meeting", entry.toString());
+    }
 }
