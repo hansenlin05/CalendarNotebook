@@ -28,11 +28,34 @@ public class DateTest {
 
     @Test
     public void testEquals() {
-        Date date1 = new Date(1, 1, 2024);
-        Date date2 = new Date(1, 1, 2024);
-        Date date3 = new Date(2, 1, 2024);
+        // Test for equality with itself
+        Date date = new Date(10, 2, 2024);
+        assertTrue(date.equals(date));
 
-        assertEquals(date1, date2); // Should be equal
-        assertNotEquals(date1, date3); // Should not be equal
+        // Test for inequality with null
+        assertFalse(date.equals(null));
+
+        // Test for inequality with different type
+        assertFalse(date.equals("2024-02-10"));
+
+        // Test for inequality with different date
+        Date differentDate = new Date(15, 2, 2024);
+        assertFalse(date.equals(differentDate));
+
+        // Test for equality with same date
+        Date sameDate = new Date(10, 2, 2024);
+        assertTrue(date.equals(sameDate));
+
+        // Test for inequality with different day
+        Date differentDay = new Date(11, 2, 2024);
+        assertFalse(date.equals(differentDay));
+
+        // Test for inequality with different month
+        Date differentMonth = new Date(10, 3, 2024);
+        assertFalse(date.equals(differentMonth));
+
+        // Test for inequality with different year
+        Date differentYear = new Date(10, 2, 2025);
+        assertFalse(date.equals(differentYear));
     }
 }
