@@ -7,11 +7,12 @@ import model.Date;
 import java.util.List;
 import java.util.Scanner;
 
+// CalendarNotebook application
 public class NotebookApp {
     private CalendarNotebook notebook;
     private Scanner scanner;
 
-    // CalendarNotebook application
+    //EFFECTS: Run the Calendar NotebookApp
     public NotebookApp() {
         notebook = new CalendarNotebook();
         scanner = new Scanner(System.in);
@@ -52,7 +53,7 @@ public class NotebookApp {
         }
     }
 
-    // EFFECTS: displays menu of options to user
+    // EFFECTS: displays listnmenu of options to user
     private void displayMenu() {
         System.out.println("\nMenu:");
         System.out.println("\ta -> Add Entry");

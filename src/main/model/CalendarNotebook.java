@@ -7,6 +7,7 @@ import java.util.List;
 public class CalendarNotebook {
     private List<CalendarEntry> entries;
 
+    //Construct a Arraylist of Notebook entries
     public CalendarNotebook() {
         entries = new ArrayList<>();
     }

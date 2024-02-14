@@ -6,6 +6,7 @@ public class Date {
     private int month;
     private int year;
 
+    //EFFECTS: Set the date to the given date
     public Date(int day, int month, int year) {
         setDay(day);
         setMonth(month);
@@ -46,6 +47,7 @@ public class Date {
         this.year = year;
     }
 
+    //EFFECTS: Return true if date equal to the date of given object
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
