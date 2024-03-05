@@ -154,7 +154,7 @@ public class NotebookApp {
             jsonWriter.open();
             jsonWriter.write(notebook);
             jsonWriter.close();
-            System.out.println("Saved " + notebook.getName() + " to " + JSON_STORE);
+            System.out.println("Saved file from to" + JSON_STORE);
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }
@@ -165,7 +165,7 @@ public class NotebookApp {
     private void loadNotebook() {
         try {
             notebook = jsonReader.read();
-            System.out.println("Loaded " + notebook.getName() + " from " + JSON_STORE);
+            System.out.println("Loaded file from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }

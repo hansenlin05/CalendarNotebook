@@ -55,8 +55,8 @@ public class JsonReader {
         return notebook;
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingies from JSON object and adds them to Notebook
+    // MODIFIES: notebook
+    // EFFECTS: parses entries from JSON object and adds them to Notebook
     private void addEntries(CalendarNotebook notebook, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("entries");
         for (Object json : jsonArray) {
@@ -65,8 +65,8 @@ public class JsonReader {
         }
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingy from JSON object and adds it to workroom
+    // MODIFIES: notebook
+    // EFFECTS: parses entry from JSON object and adds it to Notebook
     private void addEntry(CalendarNotebook notebook, JSONObject jsonObject) {
         int day = jsonObject.getInt("day");
         int month = jsonObject.getInt("month");
@@ -77,4 +77,3 @@ public class JsonReader {
         notebook.addEntry(entry);
     }
 }
-

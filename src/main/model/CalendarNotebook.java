@@ -9,7 +9,6 @@ import java.util.List;
 
 //Represents a calendar notebook containing entries for various dates.
 public class CalendarNotebook implements Writable {
-    private String name;
     private List<CalendarEntry> entries;
 
     //Effects: Construct a Arraylist of Notebook entries
@@ -17,9 +16,7 @@ public class CalendarNotebook implements Writable {
         entries = new ArrayList<>();
     }
 
-    public String getName() {
-        return name;
-    }
+
 
     // Modifies: This CalendarNotebook's entries.
     // Effects: Adds the specified entry to the notebook.

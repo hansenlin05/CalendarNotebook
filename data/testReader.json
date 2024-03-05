@@ -1,0 +1,16 @@
+{
+  "entries": [
+    {
+      "day": 1,
+      "month": 1,
+      "year": 2022,
+      "content": "Entry 1"
+    },
+    {
+      "day": 2,
+      "month": 1,
+      "year": 2022,
+      "content": "Entry 2"
+    }
+  ]
+}
