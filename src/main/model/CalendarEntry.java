@@ -1,11 +1,14 @@
 package model;
 
- //Represents an entry in the calendar notebook.
-public class CalendarEntry {
+import org.json.JSONObject;
+import persistence.Writable;
+
+//Represents an entry in the calendar notebook.
+public class CalendarEntry implements Writable {
     private Date date;
     private String content;
 
-    //Constructs a CalendarEntry with the given date and content.
+    //Effects: Constructs a CalendarEntry with the given date and content.
     //date: The date of the entry.
     //content: The content of the entry.
     public CalendarEntry(Date date, String content) {
@@ -27,6 +30,16 @@ public class CalendarEntry {
     //EFFECTS: returns a string representation of content
     public String toString() {
         return content;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("day", date.getDay());
+        json.put("month", date.getMonth());
+        json.put("year", date.getYear());
+        json.put("content", content);
+        return json;
     }
 }
 

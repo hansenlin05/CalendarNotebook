@@ -3,19 +3,28 @@ package ui;
 import model.CalendarEntry;
 import model.CalendarNotebook;
 import model.Date;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
 // CalendarNotebook application
 public class NotebookApp {
+    private static final String JSON_STORE = "./data/notebook.json";
     private CalendarNotebook notebook;
-    private Scanner scanner;
+    private Scanner input;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     //EFFECTS: Run the Calendar NotebookApp
-    public NotebookApp() {
+    public NotebookApp() throws FileNotFoundException {
         notebook = new CalendarNotebook();
-        scanner = new Scanner(System.in);
+        input = new Scanner(System.in);
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runNotebook();
     }
 
@@ -27,7 +36,7 @@ public class NotebookApp {
 
         while (keepRunning) {
             displayMenu();
-            input = scanner.next();
+            input = this.input.next();
             input = input.toLowerCase();
 
             if (input.equals("q")) {
@@ -48,17 +57,23 @@ public class NotebookApp {
             viewEntriesForDate();
         } else if (command.equals("d")) {
             deleteEntry();
+        } else if (command.equals("s")) {
+            saveNotebook();
+        } else if (command.equals("l")) {
+            loadNotebook();
         } else {
             System.out.println("Invalid choice. Please try again.");
         }
     }
 
-    // EFFECTS: displays listnmenu of options to user
+    // EFFECTS: displays list menu of options to user
     private void displayMenu() {
         System.out.println("\nMenu:");
         System.out.println("\ta -> Add Entry");
         System.out.println("\tv -> View Entries for Date");
         System.out.println("\td -> Delete Entry");
+        System.out.println("\ts -> save Notebook to file");
+        System.out.println("\tl -> load save Notebook from file");
         System.out.println("\tq -> quit");
         System.out.print("Enter your choice below: ");
     }
@@ -66,15 +81,16 @@ public class NotebookApp {
     // MODIFIES: this
     // EFFECTS: prompts the user to enter date and content for a new entry, then adds it to the notebook
     private void addEntry() {
+
         System.out.println("Enter date (day month year): ");
-        int day = scanner.nextInt();
-        int month = scanner.nextInt();
-        int year = scanner.nextInt();
+        int day = input.nextInt();
+        int month = input.nextInt();
+        int year = input.nextInt();
         Date date = new Date(day, month, year);
 
         System.out.println("Enter content for the entry: ");
-        scanner.nextLine();
-        String content = scanner.nextLine();
+        input.nextLine();
+        String content = input.nextLine();
 
         CalendarEntry entry = new CalendarEntry(date, content);
         notebook.addEntry(entry);
@@ -90,10 +106,10 @@ public class NotebookApp {
     // EFFECTS: prompts the user to enter a date, then displays entries for that date
     private void viewEntriesForDate() {
         System.out.println("Enter date to view entries (day month year): ");
-        int day = scanner.nextInt();
-        int month = scanner.nextInt();
-        int year = scanner.nextInt();
-        scanner.nextLine();
+        int day = input.nextInt();
+        int month = input.nextInt();
+        int year = input.nextInt();
+        input.nextLine();
 
         Date date = new Date(day, month, year);
 
@@ -112,14 +128,14 @@ public class NotebookApp {
     // EFFECTS: prompts the user to enter a date and content of entry to delete, then deletes it from the notebook
     private void deleteEntry() {
         System.out.println("Enter date of entry to delete (day month year): ");
-        int day = scanner.nextInt();
-        int month = scanner.nextInt();
-        int year = scanner.nextInt();
+        int day = input.nextInt();
+        int month = input.nextInt();
+        int year = input.nextInt();
         Date date = new Date(day, month, year);
 
         System.out.println("Enter content of entry to delete: ");
-        scanner.nextLine();  // Consume newline character
-        String content = scanner.nextLine();
+        input.nextLine();  // Consume newline character
+        String content = input.nextLine();
 
         List<CalendarEntry> entries = notebook.getEntriesForDate(date);
         for (CalendarEntry entry : entries) {
@@ -130,5 +146,28 @@ public class NotebookApp {
             }
         }
         System.out.println("No matching entry found for deletion.");
+    }
+
+    // EFFECTS: saves the workroom to file
+    private void saveNotebook() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(notebook);
+            jsonWriter.close();
+            System.out.println("Saved " + notebook.getName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadNotebook() {
+        try {
+            notebook = jsonReader.read();
+            System.out.println("Loaded " + notebook.getName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 }

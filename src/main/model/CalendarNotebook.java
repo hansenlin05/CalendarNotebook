@@ -1,15 +1,24 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 //Represents a calendar notebook containing entries for various dates.
-public class CalendarNotebook {
+public class CalendarNotebook implements Writable {
+    private String name;
     private List<CalendarEntry> entries;
 
-    //Construct a Arraylist of Notebook entries
+    //Effects: Construct a Arraylist of Notebook entries
     public CalendarNotebook() {
         entries = new ArrayList<>();
+    }
+
+    public String getName() {
+        return name;
     }
 
     // Modifies: This CalendarNotebook's entries.
@@ -36,4 +45,22 @@ public class CalendarNotebook {
         return entriesForDate;
     }
 
+    // Effects: Returns the list of all entries in the notebook.
+    public List<CalendarEntry> getEntries() {
+        return entries;
+    }
+
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        JSONArray entriesArray = new JSONArray();
+
+        for (CalendarEntry entry : entries) {
+            entriesArray.put(entry.toJson());
+        }
+        json.put("entries", entriesArray);
+        return json;
+
+    }
 }

@@ -6,7 +6,7 @@ public class Date {
     private int month;
     private int year;
 
-    //EFFECTS: Set the date to the given date
+    //EFFECTS:Constructs a date and Set the date to the given date
     public Date(int day, int month, int year) {
         setDay(day);
         setMonth(month);
