@@ -7,6 +7,9 @@ import persistence.Writable;
 import java.util.ArrayList;
 import java.util.List;
 
+//Parts of the code in this file referenced from the JsonSerialization Demo
+// https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+
 //Represents a calendar notebook containing entries for various dates.
 public class CalendarNotebook implements Writable {
     private List<CalendarEntry> entries;
@@ -15,8 +18,6 @@ public class CalendarNotebook implements Writable {
     public CalendarNotebook() {
         entries = new ArrayList<>();
     }
-
-
 
     // Modifies: This CalendarNotebook's entries.
     // Effects: Adds the specified entry to the notebook.

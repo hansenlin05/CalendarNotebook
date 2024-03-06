@@ -2,6 +2,7 @@ package ui;
 
 import java.io.FileNotFoundException;
 
+//Represent a Starter of Calendar Notebook app
 public class Main {
     public static void main(String[] args) {
         try {

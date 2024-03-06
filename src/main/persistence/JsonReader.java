@@ -1,10 +1,6 @@
 package persistence;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.stream.Stream;
 
 import model.CalendarEntry;
 import model.CalendarNotebook;
@@ -14,11 +10,11 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-import model.CalendarNotebook;
-import org.json.*;
+
+
+//Parts of the code in this file referenced from the JsonSerialization Demo
+// https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 
 // Represents a reader that reads Notebooks from JSON data stored in Local file
 public class JsonReader {

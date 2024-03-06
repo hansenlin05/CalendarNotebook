@@ -2,18 +2,15 @@ package persistence;
 
 import model.CalendarEntry;
 import model.CalendarNotebook;
-import model.Date;
 import org.json.JSONObject;
-
-import model.CalendarNotebook;
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
-import java.io.*;
+//Parts of the code in this file referenced from the JsonSerialization Demo
+// https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 
 // Represents a writer that writes JSON representation of workroom to file
 public class JsonWriter {

@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
+//Parts of the code in this file referenced from the JsonSerialization Demo
+// https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+
 // CalendarNotebook application
 public class NotebookApp {
     private static final String JSON_STORE = "./data/notebook.json";
@@ -154,7 +157,7 @@ public class NotebookApp {
             jsonWriter.open();
             jsonWriter.write(notebook);
             jsonWriter.close();
-            System.out.println("Saved file from to" + JSON_STORE);
+            System.out.println("Saved file to" + JSON_STORE);
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }
