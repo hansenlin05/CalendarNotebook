@@ -47,6 +47,12 @@ public class Date {
         this.year = year;
     }
 
+    //EFFECTS: Return Date in string
+    @Override
+    public String toString() {
+        return day + "/" + month + "/" + year;
+    }
+
     //EFFECTS: Return true if date equal to the date of given object
     @Override
     public boolean equals(Object obj) {

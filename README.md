@@ -14,6 +14,7 @@ With the development of society, more and more people rely on laptops to work an
 - As a **user**, I want all the logs to be saved as a local file 
 - As a **user**, when I select the quit option from the application menu, I want to be reminded to save my log to file and have the option to do so or not.
 - As a **user**, I want to be able to load the log file when I open the log notebook.
+- As a **user**, I want to be able to view all the entries with datesin the notebook.
 
 
  

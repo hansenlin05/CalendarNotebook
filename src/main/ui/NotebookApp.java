@@ -58,6 +58,8 @@ public class NotebookApp {
             addEntry();
         } else if (command.equals("v")) {
             viewEntriesForDate();
+        } else if (command.equals("va")) {
+            viewAllEntries();
         } else if (command.equals("d")) {
             deleteEntry();
         } else if (command.equals("s")) {
@@ -74,6 +76,7 @@ public class NotebookApp {
         System.out.println("\nMenu:");
         System.out.println("\ta -> Add Entry");
         System.out.println("\tv -> View Entries for Date");
+        System.out.println("\tva -> View All Entries");
         System.out.println("\td -> Delete Entry");
         System.out.println("\ts -> save Notebook to file");
         System.out.println("\tl -> load save Notebook from file");
@@ -123,6 +126,20 @@ public class NotebookApp {
             System.out.println("Entries for " + date + ":");
             for (CalendarEntry entry : entries) {
                 System.out.println(entry.getContent());
+            }
+        }
+    }
+
+    // MODIFIES: this
+    //Effects: view all current Entries
+    private void viewAllEntries() {
+        List<CalendarEntry> entries = notebook.getEntries();
+        if (entries.isEmpty()) {
+            System.out.println("当前没有任何条目。");
+        } else {
+            System.out.println("所有的条目如下：");
+            for (CalendarEntry entry : entries) {
+                System.out.println(entry.toString());
             }
         }
     }

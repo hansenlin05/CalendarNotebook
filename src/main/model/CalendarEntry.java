@@ -29,7 +29,7 @@ public class CalendarEntry implements Writable {
 
     //EFFECTS: returns a string representation of content
     public String toString() {
-        return content;
+        return date + " - " + content;
     }
 
     @Override
