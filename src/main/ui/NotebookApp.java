@@ -168,7 +168,7 @@ public class NotebookApp {
         System.out.println("No matching entry found for deletion.");
     }
 
-    // EFFECTS: saves the workroom to file
+    // EFFECTS: saves the Notebook to file
     private void saveNotebook() {
         try {
             jsonWriter.open();
@@ -181,7 +181,7 @@ public class NotebookApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: loads workroom from file
+    // EFFECTS: loads Notebook from file
     private void loadNotebook() {
         try {
             notebook = jsonReader.read();

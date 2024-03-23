@@ -48,6 +48,16 @@ public class CalendarNotebook implements Writable {
         return entries;
     }
 
+    public List<CalendarEntry> searchEntries(String query) {
+        List<CalendarEntry> results = new ArrayList<>();
+        for (CalendarEntry entry : entries) {
+            if (entry.getDate().toString().contains(query) || entry.getContent().contains(query)) {
+                results.add(entry);
+            }
+        }
+        return results;
+    }
+
 
 
 
