@@ -12,6 +12,9 @@ import org.junit.jupiter.api.BeforeEach;
 import java.util.List;
 
 public class CalendarNotebookTest {
+    private CalendarNotebook notebook;
+    private CalendarEntry entry1;
+    private CalendarEntry entry2;
 
     @BeforeEach
     public void setUp() {
@@ -98,4 +101,27 @@ public class CalendarNotebookTest {
 
             assertEquals(expectedJson.toString(), notebook.toJson().toString());
         }
+    @Test
+    public void testSearchEntries_found() {
+        notebook = new CalendarNotebook();
+        entry1 = new CalendarEntry(new Date(2024, 3, 24), "Meeting with John");
+        entry2 = new CalendarEntry(new Date(2024, 3, 25), "Dinner with Alice");
+        notebook.addEntry(entry1);
+        notebook.addEntry(entry2);
+        List<CalendarEntry> results = notebook.searchEntries("John");
+        assertEquals(1, results.size());
+        assertTrue(results.contains(entry1));
     }
+
+    @Test
+    public void testSearchEntries_notFound() {
+        notebook = new CalendarNotebook();
+        entry1 = new CalendarEntry(new Date(2024, 3, 24), "Meeting with John");
+        entry2 = new CalendarEntry(new Date(2024, 3, 25), "Dinner with Alice");
+        notebook.addEntry(entry1);
+        notebook.addEntry(entry2);
+        List<CalendarEntry> results = notebook.searchEntries("nonexistent content");
+        assertTrue(results.isEmpty());
+    }
+}
+

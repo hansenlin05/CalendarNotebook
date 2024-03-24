@@ -14,7 +14,7 @@ import java.util.List;
 public class CalendarNotebook implements Writable {
     private List<CalendarEntry> entries;
 
-    //Effects: Construct a Arraylist of Notebook entries
+    //Effects: Construct an Arraylist of Notebook entries
     public CalendarNotebook() {
         entries = new ArrayList<>();
     }
@@ -48,6 +48,10 @@ public class CalendarNotebook implements Writable {
         return entries;
     }
 
+    //REQUIRES: searchString is not null
+    // MODIFIES: none
+    // EFFECTS: Returns a list of CalendarEntry objects whose content contains the searchString.
+    // If no such entries exist, returns an empty list.
     public List<CalendarEntry> searchEntries(String query) {
         List<CalendarEntry> results = new ArrayList<>();
         for (CalendarEntry entry : entries) {
@@ -58,9 +62,13 @@ public class CalendarNotebook implements Writable {
         return results;
     }
 
-
-
-
+    // REQUIRES: none
+//      MODIFIES: none
+//      EFFECTS: Returns a JSONObject that represents this CalendarNotebook. The structure
+//              of the JSONObject would depend on the specific implementation of the
+//               CalendarNotebook class. For example, it could contain a single key "entries"
+//                      associated with a JSONArray, where each element of the JSONArray is a
+//JSONObject representing a CalendarEntry in this CalendarNotebook.
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

@@ -32,6 +32,13 @@ public class CalendarEntry implements Writable {
         return date + " - " + content;
     }
 
+    //      REQUIRES: none
+    //      MODIFIES: none
+    //      EFFECTS: Returns a JSONObject that represents this CalendarEntry. The JSONObject
+    //               contains four keys: "day", "month", "year", and "content". The values
+    //               associated with these keys represent the day, month, year, and content
+    //               of this CalendarEntry, respectively.
+    //
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

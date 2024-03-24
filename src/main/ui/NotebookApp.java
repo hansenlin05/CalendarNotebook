@@ -18,9 +18,9 @@ import java.util.Scanner;
 public class NotebookApp {
     private static final String JSON_STORE = "./data/notebook.json";
     private CalendarNotebook notebook;
-    private final Scanner input;
-    private final JsonWriter jsonWriter;
-    private final JsonReader jsonReader;
+    private Scanner input;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     //EFFECTS: Run the Calendar NotebookApp
     public NotebookApp() throws FileNotFoundException {
