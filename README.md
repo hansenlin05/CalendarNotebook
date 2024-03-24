@@ -18,11 +18,12 @@ With the development of society, more and more people rely on laptops to work an
 - As a **user**, I want to be able to clear all text content I entered if I don't want it.
 
 # *Instructions for Grader*
-- You can enter the date you want to add and the content of the entry in the date and content boxes on the right.
-- You can then click AddEntry to complete the process of adding the entry to the date (multiple entries can be made for one date).
-- You can receive feedback from the application when you open it, exit it, save it, reload it, and these feedbacks include images, the logo of the app at the top of the application, and the logo in the middle of the Universal Searcher panel.
-- You can save all current entries to a local json file by clicking on the Save Notepad option in the function panel.
-- You can reload the local json file to restore the notebook to the last saved state.
-- You can search for entries in the diary by typing the date or content in the universal searcher input box
-- You can delete an entry from the notebook by clicking the delete button next to each entry
- 
+- You can enter the date you want to add and the content of the entry in the date and content boxes on the Control panel
+- You can then click Add Entry Button to complete the process of adding the entry to the date (multiple entries can be entered for one date).
+- You can receive feedback from the application when you open it, exit it, save it, reload it, and these feedbacks include images. the logo of the app located at the top of the application, the logo Universal Searcher logo located at top of the Universal Searcher panel.
+- You can save all current entries to a local json file by clicking on the Save Button in the Control panel.
+- You can reload the local json file to restore the notebook to the last saved state by clicking on the Load Button in the Control panel.
+- You can retrieve relevant entries in the Notebook by typing the date or content in the universal searcher input box and clicking the search button.
+- You can delete an entry from the notebook by clicking the delete button next to each entry.
+- You can click the Clear button to clear the date entry box, the content entry box, and the Universal searcher.
+- - You can click the Quit button to exit the App
