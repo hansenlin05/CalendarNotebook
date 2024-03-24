@@ -8,43 +8,46 @@ import persistence.JsonWriter;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
-public class CalendarNotebookGUI {
-    protected JFrame frame = new JFrame("Calendar Notebook");
-    private JPanel entryPanel = new JPanel();
-    private JPanel controlPanel = new JPanel();
-    private JPanel searchResultPanel = new JPanel();
-    private JPanel searchPanel = new JPanel();
-    private JScrollPane searchScrollPanel = new JScrollPane(searchResultPanel);
-    private JScrollPane entryScrollPane = new JScrollPane(entryPanel);
-    private JTextField dateField = new JTextField();
-    private JTextField contentField = new JTextField();
-    private JTextField searchField = new JTextField();
-    private CalendarNotebook notebook = new CalendarNotebook();
-    private JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
-    private JsonReader jsonReader = new JsonReader(JSON_STORE);
+public class CalendarNotebookGUI extends JFrame {
     private static final String JSON_STORE = "./data/notebook.json";
-    private JLabel searchLabel = new JLabel("Search by Date (dd/mm/yyyy) or Content:");
-    private JLabel contentLabel = new JLabel("Enter content:");
-    private JLabel dateLabel = new JLabel("Enter date for new entry (dd/mm/yyyy):");
-    private JButton searchButton = new JButton("Search");
-    private JButton addButton = new JButton("Add Entry");
-    private JButton clearButton = new JButton("Clear");
-    private JButton loadButton = new JButton("Load");
-    private JButton quitButton = new JButton("Quit");
-    private JButton saveButton = new JButton("Save");
-    private ImageIcon image1 = new ImageIcon("./data/image1.jpg");
-    private ImageIcon image2 = new ImageIcon("./data/image2.jpg");
-    private ImageIcon image3 = new ImageIcon("./data/image3.jpg");
-    private JLabel imageLabel1 = new JLabel(image1);
-    private JLabel imageLabel2 = new JLabel(image2);
-    private JLabel imageLabel3 = new JLabel(image3);
+    protected final JPanel entryPanel = new JPanel();
+    private final JPanel controlPanel = new JPanel();
+    private final JPanel searchResultPanel = new JPanel();
+    private final JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+    private final JScrollPane searchScrollPanel = new JScrollPane(searchResultPanel);
+    private final JScrollPane entryScrollPane = new JScrollPane(entryPanel);
+    private final JTextField dateField = new JTextField();
+    private final JTextField contentField = new JTextField();
+    private final JTextField searchField = new JTextField();
+    private final JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
+    private final JsonReader jsonReader = new JsonReader(JSON_STORE);
+    private final JLabel searchLabel = new JLabel("Search by Date (dd/mm/yyyy) or Content:");
+    private final JLabel contentLabel = new JLabel("Enter content for new Entry:");
+    private final JLabel dateLabel = new JLabel("Enter date for new entry (dd/mm/yyyy):");
+    private final JLabel entryLabel = new JLabel(
+            "<html><body><p>Oh, my God! Your notebook is empty.</p></body></html>"
+                    + "<html><body><p> Is this your first time using it?</p></body></html>");
+    private final JButton searchButton = new JButton("Search");
+    private final JButton addButton = new JButton("Add Entry");
+    private final JButton clearButton = new JButton("Clear");
+    private final JButton loadButton = new JButton("Load");
+    private final JButton quitButton = new JButton("Quit");
+    private final JButton saveButton = new JButton("Save");
+    private final ImageIcon image1 = new ImageIcon("./data/Notebook.jpg");
+    private final ImageIcon image2 = new ImageIcon("./data/search.jpg");
+    private final ImageIcon image3 = new ImageIcon("./data/ok.png");
+    private final ImageIcon image4 = new ImageIcon("./data/mock.jpg");
+    private final ImageIcon image5 = new ImageIcon("./data/think.jpg");
+    private final JLabel imageLabel1 = new JLabel(image1);
+    private final JLabel imageLabel2 = new JLabel(image2);
+    protected JFrame frame = new JFrame("Calendar Notebook");
+    private CalendarNotebook notebook = new CalendarNotebook();
 
     public CalendarNotebookGUI() {
         initializeUI();
@@ -61,33 +64,35 @@ public class CalendarNotebookGUI {
 
     private void setupFrameAndPanels() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 600);
+        frame.setSize(1200, 600);
         frame.setLayout(new BorderLayout());
 
         JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JLabel titleLabel = new JLabel("欢迎使用日记记事本");
-        topPanel.add(titleLabel);
+
+        image1.setImage(image1.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+        topPanel.setBorder(BorderFactory.createTitledBorder("Welcome to The Calendar notebook App!:"));
         topPanel.add(imageLabel1);
-        topPanel.add(imageLabel2);
-        topPanel.add(imageLabel3);
         frame.add(topPanel, BorderLayout.NORTH);
 
         entryPanel.setLayout(new BoxLayout(entryPanel, BoxLayout.Y_AXIS));
-        entryScrollPane.setBorder(BorderFactory.createTitledBorder("左侧面板 - 全部条目"));
+        entryScrollPane.setBorder(BorderFactory.createTitledBorder("All Entries In The Notebook:"));
         frame.add(entryScrollPane, BorderLayout.WEST);
 
         searchPanel.setLayout(new BoxLayout(searchPanel, BoxLayout.Y_AXIS));
-        searchPanel.setBorder(BorderFactory.createTitledBorder("中间面板 - 搜索"));
+        searchPanel.setBorder(BorderFactory.createTitledBorder("Universal Searcher"));
         frame.add(searchPanel, BorderLayout.CENTER);
 
         controlPanel.setLayout(new GridLayout(7, 2));
-        controlPanel.setBorder(BorderFactory.createTitledBorder("右侧面板 - 控制"));
+        controlPanel.setBorder(BorderFactory.createTitledBorder("Control Panel"));
         frame.add(controlPanel, BorderLayout.EAST);
+
     }
+
 
     private void setupControlPanel() {
         controlPanel.add(dateLabel);
         controlPanel.add(dateField);
+        dateField.setText("dd/mm/yyyy");
         controlPanel.add(contentLabel);
         controlPanel.add(contentField);
         addButton.addActionListener(e -> addEntry());
@@ -96,13 +101,18 @@ public class CalendarNotebookGUI {
         controlPanel.add(clearButton);
         setupSaveLoadButtons();
         setupQuitButton();
+        quitButton.setBackground(Color.red);
+        quitButton.setForeground(Color.WHITE);
     }
 
     private void setupEntryPanel() {
-        // Method placeholder for future enhancements
+        entryPanel.add(entryLabel);
     }
 
     private void setupSearchPanel() {
+        image2.setImage(image2.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+
+        searchPanel.add(imageLabel2);
         searchPanel.add(searchLabel);
         setupSearchFieldAndButton();
     }
@@ -117,6 +127,13 @@ public class CalendarNotebookGUI {
     }
 
     private void setupSaveLoadButtons() {
+        saveButton.setBackground(Color.BLUE);
+        saveButton.setForeground(Color.WHITE);
+        loadButton.setBackground(Color.BLUE);
+        loadButton.setForeground(Color.WHITE);
+        addButton.setBackground(Color.green);
+        addButton.setForeground(Color.WHITE);
+
         saveButton.addActionListener(e -> saveNotebook());
         controlPanel.add(saveButton);
         loadButton.addActionListener(e -> loadNotebook());
@@ -125,12 +142,20 @@ public class CalendarNotebookGUI {
 
     private void setupQuitButton() {
         quitButton.addActionListener(e -> {
-            int option = JOptionPane.showConfirmDialog(frame, "Do you want to save the notebook before quitting?", "Quit", JOptionPane.YES_NO_CANCEL_OPTION);
+            int option = JOptionPane.showConfirmDialog(frame,
+                    "Do you want to save the notebook before quitting?", "Quit", JOptionPane.YES_NO_CANCEL_OPTION);
             if (option == JOptionPane.YES_OPTION) {
                 saveNotebook();
                 System.exit(0);
             } else if (option == JOptionPane.NO_OPTION) {
+                image4.setImage(image4.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+                JOptionPane.showMessageDialog(frame, "You Lost all data since Last Save!",
+                        "The App mocked you", JOptionPane.WARNING_MESSAGE, image4);
                 System.exit(0);
+            } else {
+                image5.setImage(image5.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+                JOptionPane.showMessageDialog(frame, "Think before you do",
+                        "The App criticized you", JOptionPane.WARNING_MESSAGE, image5);
             }
         });
         controlPanel.add(quitButton);
@@ -141,11 +166,23 @@ public class CalendarNotebookGUI {
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent windowEvent) {
-                int option = JOptionPane.showConfirmDialog(frame, "Do you want to save the notebook before quitting?", "Close Window", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                int option = JOptionPane.showConfirmDialog(frame,
+
+                        "Do you want to save the notebook before quitting?",
+                        "Close Window", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (option == JOptionPane.YES_OPTION) {
                     saveNotebook();
+                    System.exit(0);
+                } else if (option == JOptionPane.NO_OPTION) {
+                    image4.setImage(image4.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+                    JOptionPane.showMessageDialog(frame, "You Lost all data since Last Save!",
+                            "The App mocked you", JOptionPane.WARNING_MESSAGE, image4);
+                    System.exit(0);
+                } else {
+                    image5.setImage(image5.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+                    JOptionPane.showMessageDialog(frame, "Think before you do",
+                            "The App criticized you", JOptionPane.WARNING_MESSAGE, image5);
                 }
-                System.exit(0);
             }
         });
     }
@@ -160,28 +197,38 @@ public class CalendarNotebookGUI {
             String content = contentField.getText();
             CalendarEntry entry = new CalendarEntry(date, content);
             notebook.addEntry(entry);
-            addEntryToPanel(entry, entryPanel);
-            JOptionPane.showMessageDialog(frame, "Entry added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+            entryPanel.removeAll();
+            for (CalendarEntry e : notebook.getEntries()) {
+                addEntryToPanel(e, entryPanel);
+            }
+            entryPanel.revalidate();
+            entryPanel.repaint();
+            image3.setImage(image3.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+            JOptionPane.showMessageDialog(frame, "Entry added successfully!",
+                    "The App praised you", JOptionPane.WARNING_MESSAGE, image3);
         } else {
-            JOptionPane.showMessageDialog(frame, "Invalid date format or content is empty.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(frame, "Invalid date format or content is empty.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private void clearFields() {
         dateField.setText("");
         contentField.setText("");
+        searchField.setText("");
     }
 
     private boolean validateDate(String dateStr) {
         String[] parts = dateStr.split("/");
-        if (        parts.length != 3) {
+        if (parts.length != 3) {
             return false;
         }
         try {
             int day = Integer.parseInt(parts[0]);
             int month = Integer.parseInt(parts[1]);
             int year = Integer.parseInt(parts[2]);
-            return (day > 0 && day <= 31 && month > 0 && month <= 12 && year > 1900 && year < 2100);
+            return (day > 0 && day <= 31 && month > 0 && month <= 12 && year > 1000 && year < 3100);
         } catch (NumberFormatException e) {
             return false;
         }
@@ -199,7 +246,8 @@ public class CalendarNotebookGUI {
 
         // Show dialog if no entries found
         if (entries.isEmpty()) {
-            JOptionPane.showMessageDialog(frame, "No entries found for the given query.", "Search Results", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(frame, "No entries found for the given query.",
+                    "Search Results", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -208,9 +256,12 @@ public class CalendarNotebookGUI {
             jsonWriter.open();
             jsonWriter.write(notebook);
             jsonWriter.close();
-            JOptionPane.showMessageDialog(frame, "Notebook saved successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            image3.setImage(image3.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+            JOptionPane.showMessageDialog(frame, "Notebook saved successfully!",
+                    "The App praised you", JOptionPane.WARNING_MESSAGE, image3);
         } catch (FileNotFoundException e) {
-            JOptionPane.showMessageDialog(frame, "Unable to write to file: " + JSON_STORE, "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(frame, "Unable to write to file: " + JSON_STORE,
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -223,9 +274,12 @@ public class CalendarNotebookGUI {
             }
             entryPanel.revalidate();
             entryPanel.repaint();
-            JOptionPane.showMessageDialog(frame, "Notebook loaded successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            image3.setImage(image3.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+            JOptionPane.showMessageDialog(frame, "Notebook Loaded successfully!",
+                    "The App praised you", JOptionPane.WARNING_MESSAGE, image3);
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(frame, "Unable to read from file: " + JSON_STORE, "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(frame, "Unable to read from file: " + JSON_STORE,
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -235,10 +289,16 @@ public class CalendarNotebookGUI {
         JButton deleteButton = new JButton("Delete");
         deleteButton.addActionListener(e -> {
             notebook.deleteEntry(entry);
-            panel.remove(entryDisplayPanel);
+            entryPanel.removeAll();
+            for (CalendarEntry entries : notebook.getEntries()) {
+                addEntryToPanel(entries, entryPanel);
+            }
             panel.revalidate();
             panel.repaint();
-            JOptionPane.showMessageDialog(frame, "Entry deleted successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+            image3.setImage(image3.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+            JOptionPane.showMessageDialog(frame, "Entry deleted successfully!",
+                    "The App praised you", JOptionPane.WARNING_MESSAGE, image3);
         });
         entryDisplayPanel.add(deleteButton);
         panel.add(entryDisplayPanel);

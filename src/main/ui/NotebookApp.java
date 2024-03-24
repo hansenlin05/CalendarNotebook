@@ -18,9 +18,9 @@ import java.util.Scanner;
 public class NotebookApp {
     private static final String JSON_STORE = "./data/notebook.json";
     private CalendarNotebook notebook;
-    private Scanner input;
-    private JsonWriter jsonWriter;
-    private JsonReader jsonReader;
+    private final Scanner input;
+    private final JsonWriter jsonWriter;
+    private final JsonReader jsonReader;
 
     //EFFECTS: Run the Calendar NotebookApp
     public NotebookApp() throws FileNotFoundException {
@@ -135,9 +135,9 @@ public class NotebookApp {
     private void viewAllEntries() {
         List<CalendarEntry> entries = notebook.getEntries();
         if (entries.isEmpty()) {
-            System.out.println("当前没有任何条目。");
+            System.out.println("No entry");
         } else {
-            System.out.println("所有的条目如下：");
+            System.out.println("All entrys: ");
             for (CalendarEntry entry : entries) {
                 System.out.println(entry.toString());
             }
