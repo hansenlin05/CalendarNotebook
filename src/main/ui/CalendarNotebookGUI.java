@@ -188,6 +188,8 @@ public class CalendarNotebookGUI extends JFrame {
         });
     }
 
+    // MODIFIES: this
+    // EFFECTS: Give User Feedback base on their Choose when quiting the app
     private void quitComfirm(int option) {
         if (option == JOptionPane.YES_OPTION) {
             saveNotebook();

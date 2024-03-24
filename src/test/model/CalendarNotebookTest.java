@@ -18,7 +18,7 @@ public class CalendarNotebookTest {
 
     @BeforeEach
     public void setUp() {
-
+        notebook = new CalendarNotebook();
     }
 
     @Test
@@ -102,20 +102,32 @@ public class CalendarNotebookTest {
             assertEquals(expectedJson.toString(), notebook.toJson().toString());
         }
     @Test
-    public void testSearchEntries_found() {
-        notebook = new CalendarNotebook();
-        entry1 = new CalendarEntry(new Date(2024, 3, 24), "Meeting with John");
-        entry2 = new CalendarEntry(new Date(2024, 3, 25), "Dinner with Alice");
+    public void testSearchEntries() {
+        CalendarEntry entry1 = new CalendarEntry(new Date(10, 2, 2024), "Meeting with John");
+        CalendarEntry entry2 = new CalendarEntry(new Date(11, 2, 2024), "Dinner with Alice");
         notebook.addEntry(entry1);
         notebook.addEntry(entry2);
-        List<CalendarEntry> results = notebook.searchEntries("John");
+
+        // Test when the query string is in the date of an entry
+        List<CalendarEntry> results = notebook.searchEntries("10/2/2024");
         assertEquals(1, results.size());
         assertTrue(results.contains(entry1));
+
+        // Test when the query string is in the content of an entry
+        results = notebook.searchEntries("Dinner");
+        assertEquals(1, results.size());
+        assertTrue(results.contains(entry2));
+
+        // Test when the query string is in both the date and content of an entry
+        results = notebook.searchEntries("2024");
+        assertEquals(2, results.size());
+        assertTrue(results.contains(entry1));
+        assertTrue(results.contains(entry2));
     }
+
 
     @Test
     public void testSearchEntries_notFound() {
-        notebook = new CalendarNotebook();
         entry1 = new CalendarEntry(new Date(2024, 3, 24), "Meeting with John");
         entry2 = new CalendarEntry(new Date(2024, 3, 25), "Dinner with Alice");
         notebook.addEntry(entry1);
