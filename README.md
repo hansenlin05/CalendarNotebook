@@ -13,7 +13,7 @@ With the development of society, more and more people rely on laptops to work an
 - As a **user**, I want to be able to quit the notebook.
 - As a **user**, I want all the records to be saved as a local file 
 - As a **user**, when I select the quit option from the application menu, I want to be reminded to save my log to file and have the option to do so or not.
-- As a **user**, I want to be able to be reminded to load my log to file and have the option to do so or not when I open the log notebook.
+- As a **user**, I want to be able to be reminded to load my Entry to file and have the option to do so or not when I open the notebook.
 - As a **user**, I want to be able to view all the entries with dates in the notebook.
 - As a **user**, I want to be able to clear all text content I entered if I don't want it.
 
@@ -26,4 +26,4 @@ With the development of society, more and more people rely on laptops to work an
 - You can retrieve relevant entries in the Notebook by typing the date or content in the universal searcher input box and clicking the search button.
 - You can delete an entry from the notebook by clicking the delete button next to each entry.
 - You can click the Clear button to clear the date entry box, the content entry box, and the Universal searcher.
-- - You can click the Quit button to exit the App
+- - You can click the Quit button to exit the App.
