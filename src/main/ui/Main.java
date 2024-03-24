@@ -1,6 +1,7 @@
 package ui;
 
 import javax.swing.*;
+import java.io.FileNotFoundException;
 
 //Represent a Starter of Calendar Notebook app
 public class Main {
@@ -13,6 +14,13 @@ public class Main {
             if (option == JOptionPane.YES_OPTION) {
                 gui.loadNotebook();
             }
+
+//            try {
+//                new NotebookApp();
+//            } catch (FileNotFoundException e) {
+//                System.out.println("Unable to run application: file not found");
+//            }
+
         });
     }
 }

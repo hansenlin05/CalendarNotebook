@@ -35,7 +35,7 @@ public class NotebookApp {
     // EFFECTS: processes user Console input menu
     private void runNotebook() {
         boolean keepRunning = true;
-        String input = null;
+        String input;
 
         while (keepRunning) {
             displayMenu();
@@ -54,20 +54,28 @@ public class NotebookApp {
     // MODIFIES: this
     // EFFECTS: processes user input command
     private void processInput(String command) {
-        if (command.equals("a")) {
-            addEntry();
-        } else if (command.equals("v")) {
-            viewEntriesForDate();
-        } else if (command.equals("va")) {
-            viewAllEntries();
-        } else if (command.equals("d")) {
-            deleteEntry();
-        } else if (command.equals("s")) {
-            saveNotebook();
-        } else if (command.equals("l")) {
-            loadNotebook();
-        } else {
-            System.out.println("Invalid choice. Please try again.");
+        switch (command) {
+            case "a":
+                addEntry();
+                break;
+            case "v":
+                viewEntriesForDate();
+                break;
+            case "va":
+                viewAllEntries();
+                break;
+            case "d":
+                deleteEntry();
+                break;
+            case "s":
+                saveNotebook();
+                break;
+            case "l":
+                loadNotebook();
+                break;
+            default:
+                System.out.println("Invalid choice. Please try again.");
+                break;
         }
     }
 
@@ -137,7 +145,7 @@ public class NotebookApp {
         if (entries.isEmpty()) {
             System.out.println("No entry");
         } else {
-            System.out.println("All entrys: ");
+            System.out.println("All entries: ");
             for (CalendarEntry entry : entries) {
                 System.out.println(entry.toString());
             }

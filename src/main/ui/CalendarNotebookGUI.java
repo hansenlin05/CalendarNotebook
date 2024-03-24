@@ -217,6 +217,9 @@ public class CalendarNotebookGUI extends JFrame {
         dateField.setText("");
         contentField.setText("");
         searchField.setText("");
+        searchResultPanel.removeAll();
+        searchResultPanel.revalidate();
+        searchResultPanel.repaint();
     }
 
     private boolean validateDate(String dateStr) {
@@ -238,14 +241,16 @@ public class CalendarNotebookGUI extends JFrame {
         String query = searchField.getText();
         List<CalendarEntry> entries = notebook.searchEntries(query);
         searchResultPanel.removeAll();
-        for (CalendarEntry entry : entries) {
-            addEntryToPanel(entry, searchResultPanel);
-        }
-        searchResultPanel.revalidate();
-        searchResultPanel.repaint();
+
 
         // Show dialog if no entries found
-        if (entries.isEmpty()) {
+        if (!entries.isEmpty() && !searchField.getText().trim().isEmpty()) {
+            for (CalendarEntry entry : entries) {
+                addEntryToPanel(entry, searchResultPanel);
+            }
+            searchResultPanel.revalidate();
+            searchResultPanel.repaint();
+        } else {
             JOptionPane.showMessageDialog(frame, "No entries found for the given query.",
                     "Search Results", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -274,6 +279,7 @@ public class CalendarNotebookGUI extends JFrame {
             }
             entryPanel.revalidate();
             entryPanel.repaint();
+            clearFields();
             image3.setImage(image3.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
             JOptionPane.showMessageDialog(frame, "Notebook Loaded successfully!",
                     "The App praised you", JOptionPane.WARNING_MESSAGE, image3);
@@ -290,6 +296,8 @@ public class CalendarNotebookGUI extends JFrame {
         deleteButton.addActionListener(e -> {
             notebook.deleteEntry(entry);
             entryPanel.removeAll();
+            searchResultPanel.removeAll();
+            searchEntries();
             for (CalendarEntry entries : notebook.getEntries()) {
                 addEntryToPanel(entries, entryPanel);
             }
