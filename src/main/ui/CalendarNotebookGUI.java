@@ -53,6 +53,17 @@ public class CalendarNotebookGUI extends JFrame {
     private final JLabel imageLabel1 = new JLabel(image1);
     private final JLabel imageLabel2 = new JLabel(image2);
     protected JFrame frame = new JFrame("Calendar Notebook");
+    JLabel topLabel1 = new JLabel("Few Words from programmer:");
+    JLabel topLabel2 = new JLabel("- To add Entry, enter date and content at Control Panel");
+    JLabel topLabel3 = new JLabel("   and Click the Add New Entry button");
+    JLabel topLabel4 = new JLabel("- To search for entries, use Universal Searcher");
+    JLabel topLabel5 = new JLabel("- Remember To Save your work, there is no auto-save");
+    JLabel topLabel6 = new JLabel("- Load Button can be harmful, use it wisely");
+    JLabel topLabel7 = new JLabel("- There is no Ctrl/Command + Z, just like your life");
+    JLabel topLabel8 = new JLabel("- To Report Error, Please Contact:");
+    JLabel topLabel9 = new JLabel("  Email: hansenlin05@foxmail.com");
+    JLabel topLabel10 = new JLabel("  Instagram: hansenlin05");
+    JLabel topLabel11 = new JLabel("©Hansen Lin. All Right Reserved");
     private CalendarNotebook notebook = new CalendarNotebook();
 
     // Constructs a new CalendarNotebookGUI and initializes the user interface.
@@ -79,8 +90,8 @@ public class CalendarNotebookGUI extends JFrame {
     // EFFECTS: Sets up the main frame and panels.
     private void setupFrameAndPanels() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1300, 600);
-        frame.setLayout(new GridLayout(1,3));
+        frame.setSize(1300, 800);
+        frame.setLayout(new GridLayout(1,4));
 
 
 
@@ -131,10 +142,21 @@ public class CalendarNotebookGUI extends JFrame {
     private void setupTopPanel() {
         topPanel.setBorder(BorderFactory.createTitledBorder("Welcome to The Calendar notebook App!:"));
         topPanel.add(imageLabel1, BorderLayout.NORTH);
-        topPanel.setLayout(new GridLayout(7, 1));
-        JLabel topLabel1 = new JLabel(
-                "Hansen Lin. All Right Reserved");
-        topPanel.add(topLabel1, BorderLayout.SOUTH);
+        topPanel.setLayout(new GridLayout(12, 1));
+
+        topPanel.add(topLabel1, BorderLayout.CENTER);
+        topPanel.add(topLabel2, BorderLayout.CENTER);
+        topPanel.add(topLabel3, BorderLayout.CENTER);
+        topPanel.add(topLabel4, BorderLayout.CENTER);
+        topPanel.add(topLabel5, BorderLayout.CENTER);
+        topPanel.add(topLabel6, BorderLayout.CENTER);
+        topPanel.add(topLabel7, BorderLayout.CENTER);
+        topPanel.add(topLabel8, BorderLayout.CENTER);
+        topPanel.add(topLabel9, BorderLayout.CENTER);
+        topPanel.add(topLabel10, BorderLayout.CENTER);
+        topPanel.add(topLabel11, BorderLayout.CENTER);
+
+
     }
 
 
@@ -292,9 +314,7 @@ public class CalendarNotebookGUI extends JFrame {
 
         // Show dialog if no entries found
         if (!entries.isEmpty() && !searchField.getText().trim().isEmpty()) {
-//            for (CalendarEntry entry : entries) {
-//                addEntryToPanel(entry, searchResultPanel);
-//            }
+
             addEntriesToPanel(entries, searchResultPanel);
             searchResultPanel.revalidate();
             searchResultPanel.repaint();
@@ -356,10 +376,20 @@ public class CalendarNotebookGUI extends JFrame {
             notebook.deleteEntry(entry);
             entryPanel.removeAll();
             searchResultPanel.removeAll();
-            searchEntries();
+            String query = searchField.getText();
+            List<CalendarEntry> entries = notebook.searchEntries(query);
+            searchResultPanel.removeAll();
 
-            for (CalendarEntry entries : notebook.getEntries()) {
-                addEntryToPanel(entries, entryPanel);
+            // Show dialog if no entries found
+            if (!entries.isEmpty() && !searchField.getText().trim().isEmpty()) {
+
+                addEntriesToPanel(entries, searchResultPanel);
+                searchResultPanel.revalidate();
+                searchResultPanel.repaint();
+            }
+
+            for (CalendarEntry e1 : notebook.getEntries()) {
+                addEntryToPanel(e1, entryPanel);
             }
             panel.revalidate();
             panel.repaint();
