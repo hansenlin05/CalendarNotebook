@@ -61,7 +61,7 @@ public class CalendarNotebookGUI extends JFrame {
     JLabel topLabel8 = new JLabel("- To Report Error, Please Contact:");
     JLabel topLabel9 = new JLabel("  Email: hansenlin05@foxmail.com");
     JLabel topLabel10 = new JLabel("  Instagram: hansenlin05");
-    JLabel topLabel11 = new JLabel("©Hansen Lin. All Right Reserved");
+    JLabel topLabel11 = new JLabel("Hansen Lin. All Right Reserved");
     private JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
     private CalendarNotebook notebook = new CalendarNotebook();
 
@@ -260,9 +260,7 @@ public class CalendarNotebookGUI extends JFrame {
 
             entryPanel.removeAll();
             addEntriesToPanel(notebook.getEntries(), entryPanel);
-//            for (CalendarEntry e : notebook.getEntries()) {
-//                addEntryToPanel(e, entryPanel);
-//            }
+
             entryPanel.revalidate();
             entryPanel.repaint();
             image3.setImage(image3.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
