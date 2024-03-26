@@ -1,6 +1,12 @@
 {"entries": [
     {
         "month": 12,
+        "year": 3099,
+        "day": 31,
+        "content": "human officially extinct"
+    },
+    {
+        "month": 12,
         "year": 2022,
         "day": 12,
         "content": "12/12/2022"
@@ -16,17 +22,5 @@
         "year": 1945,
         "day": 1,
         "content": "PRC First Day"
-    },
-    {
-        "month": 10,
-        "year": 1945,
-        "day": 1,
-        "content": "这玩意能输中文？"
-    },
-    {
-        "month": 12,
-        "year": 2022,
-        "day": 12,
-        "content": "还真能输中文"
     }
 ]}

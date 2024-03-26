@@ -9,6 +9,8 @@ import persistence.JsonWriter;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.Collections;
+import java.util.Comparator;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
@@ -21,6 +23,7 @@ public class CalendarNotebookGUI extends JFrame {
     protected final JPanel entryPanel = new JPanel();
     private final JPanel controlPanel = new JPanel();
     private final JPanel searchResultPanel = new JPanel();
+    private JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
     private final JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
     private final JScrollPane searchScrollPanel = new JScrollPane(searchResultPanel);
     private final JScrollPane entryScrollPane = new JScrollPane(entryPanel);
@@ -30,13 +33,12 @@ public class CalendarNotebookGUI extends JFrame {
     private final JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
     private final JsonReader jsonReader = new JsonReader(JSON_STORE);
     private final JLabel searchLabel = new JLabel("Search by Date (dd/mm/yyyy) or Content:");
-    private final JLabel contentLabel = new JLabel("Enter content for new Entry:");
-    private final JLabel dateLabel = new JLabel("Enter date for new entry (dd/mm/yyyy):");
+    private final JLabel contentLabel = new JLabel("New Entry content :");
+    private final JLabel dateLabel = new JLabel("New Entry Date:");
     private final JLabel entryLabel = new JLabel(
-            "<html><body><p>Oh, my God! Your notebook is empty.</p></body></html>"
-                    + "<html><body><p> Is this your first time using it?</p></body></html>");
+            "Oh, my God! Your notebook is empty.");
     private final JButton searchButton = new JButton("Search");
-    private final JButton addButton = new JButton("Add Entry");
+    private final JButton addButton = new JButton("Add New Entry");
     private final JButton clearButton = new JButton("Clear");
     private final JButton loadButton = new JButton("Load");
     private final JButton quitButton = new JButton("Quit");
@@ -66,6 +68,7 @@ public class CalendarNotebookGUI extends JFrame {
         setupEntryPanel();
         setupSearchPanel();
         addWindowClosingListener();
+        setupTopPanel();
         frame.setVisible(true);
         image6.setImage(image6.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
         JOptionPane.showMessageDialog(frame, "Welcome to Calendar Notebook!",
@@ -76,14 +79,13 @@ public class CalendarNotebookGUI extends JFrame {
     // EFFECTS: Sets up the main frame and panels.
     private void setupFrameAndPanels() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1200, 600);
-        frame.setLayout(new BorderLayout());
+        frame.setSize(1300, 600);
+        frame.setLayout(new GridLayout(1,3));
 
-        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+
 
         image1.setImage(image1.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
-        topPanel.setBorder(BorderFactory.createTitledBorder("Welcome to The Calendar notebook App!:"));
-        topPanel.add(imageLabel1);
+
         frame.add(topPanel, BorderLayout.NORTH);
 
         entryPanel.setLayout(new BoxLayout(entryPanel, BoxLayout.Y_AXIS));
@@ -125,6 +127,18 @@ public class CalendarNotebookGUI extends JFrame {
     }
 
     // MODIFIES: this
+    // EFFECTS: Sets up the entry panel.
+    private void setupTopPanel() {
+        topPanel.setBorder(BorderFactory.createTitledBorder("Welcome to The Calendar notebook App!:"));
+        topPanel.add(imageLabel1, BorderLayout.NORTH);
+        topPanel.setLayout(new GridLayout(7, 1));
+        JLabel topLabel1 = new JLabel(
+                "Hansen Lin. All Right Reserved");
+        topPanel.add(topLabel1, BorderLayout.SOUTH);
+    }
+
+
+    // MODIFIES: this
     // EFFECTS: Sets up the search panel.
     private void setupSearchPanel() {
         image2.setImage(image2.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
@@ -137,7 +151,7 @@ public class CalendarNotebookGUI extends JFrame {
     // MODIFIES: this
     // EFFECTS: Sets up the search AndButton.
     private void setupSearchFieldAndButton() {
-        searchField.setMaximumSize(new Dimension(Integer.MAX_VALUE, searchField.getPreferredSize().height));
+        searchField.setMaximumSize(new Dimension(700, searchField.getPreferredSize().height));
         searchPanel.add(searchField);
         searchButton.addActionListener(e -> searchEntries());
         searchPanel.add(searchButton);
@@ -225,24 +239,26 @@ public class CalendarNotebookGUI extends JFrame {
             notebook.addEntry(entry);
 
             entryPanel.removeAll();
-            for (CalendarEntry e : notebook.getEntries()) {
-                addEntryToPanel(e, entryPanel);
-            }
+            addEntriesToPanel(notebook.getEntries(), entryPanel);
+//            for (CalendarEntry e : notebook.getEntries()) {
+//                addEntryToPanel(e, entryPanel);
+//            }
             entryPanel.revalidate();
             entryPanel.repaint();
             image3.setImage(image3.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
             JOptionPane.showMessageDialog(frame, "Entry added successfully!",
                     "The App praised you", JOptionPane.WARNING_MESSAGE, image3);
         } else {
-            JOptionPane.showMessageDialog(frame, "Invalid date format or content is empty.",
-                    "Error", JOptionPane.ERROR_MESSAGE);
+            image5.setImage(image5.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+            JOptionPane.showMessageDialog(frame, "Date is invalid or content is empty",
+                    "The App criticized you", JOptionPane.WARNING_MESSAGE, image5);
         }
     }
 
     // MODIFIES: this
     // EFFECTS: Clears the text fields.
     private void clearFields() {
-        dateField.setText("");
+        dateField.setText("dd/mm/yyyy");
         contentField.setText("");
         searchField.setText("");
         searchResultPanel.removeAll();
@@ -274,17 +290,19 @@ public class CalendarNotebookGUI extends JFrame {
         List<CalendarEntry> entries = notebook.searchEntries(query);
         searchResultPanel.removeAll();
 
-
         // Show dialog if no entries found
         if (!entries.isEmpty() && !searchField.getText().trim().isEmpty()) {
-            for (CalendarEntry entry : entries) {
-                addEntryToPanel(entry, searchResultPanel);
-            }
+//            for (CalendarEntry entry : entries) {
+//                addEntryToPanel(entry, searchResultPanel);
+//            }
+            addEntriesToPanel(entries, searchResultPanel);
             searchResultPanel.revalidate();
             searchResultPanel.repaint();
         } else {
-            JOptionPane.showMessageDialog(frame, "No entries found for the given query.",
-                    "Search Results", JOptionPane.INFORMATION_MESSAGE);
+            image5.setImage(image5.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+            JOptionPane.showMessageDialog(frame,
+                    "You don't know what to search right? No matching entries found!",
+                    "The App criticized you", JOptionPane.WARNING_MESSAGE, image5);
         }
     }
 
@@ -310,9 +328,10 @@ public class CalendarNotebookGUI extends JFrame {
         try {
             notebook = jsonReader.read();
             entryPanel.removeAll();
-            for (CalendarEntry entry : notebook.getEntries()) {
-                addEntryToPanel(entry, entryPanel);
-            }
+//            for (CalendarEntry entry : notebook.getEntries()) {
+//                addEntryToPanel(entry, entryPanel);
+//            }
+            addEntriesToPanel(notebook.getEntries(), entryPanel);
             entryPanel.revalidate();
             entryPanel.repaint();
             clearFields();
@@ -328,14 +347,17 @@ public class CalendarNotebookGUI extends JFrame {
     // MODIFIES: this
     // EFFECTS: Adds an entry to a panel.
     private void addEntryToPanel(CalendarEntry entry, JPanel panel) {
+
         JPanel entryDisplayPanel = new JPanel();
         entryDisplayPanel.add(new JLabel(entry.toString()));
+
         JButton deleteButton = new JButton("Delete");
         deleteButton.addActionListener(e -> {
             notebook.deleteEntry(entry);
             entryPanel.removeAll();
             searchResultPanel.removeAll();
             searchEntries();
+
             for (CalendarEntry entries : notebook.getEntries()) {
                 addEntryToPanel(entries, entryPanel);
             }
@@ -352,6 +374,21 @@ public class CalendarNotebookGUI extends JFrame {
         panel.repaint();
     }
 
+    // MODIFIES: this
+// EFFECTS: Adds entries to the panel in sorted order.
+    private void addEntriesToPanel(List<CalendarEntry> entries, JPanel panel) {
+        // Sort the entries by date in descending order
+        Collections.sort(entries, new Comparator<CalendarEntry>() {
+            @Override
+            public int compare(CalendarEntry e1, CalendarEntry e2) {
+                return e2.getDate().compareTo(e1.getDate());
+            }
+        });
 
+        // Add each entry to the panel
+        for (CalendarEntry entry : entries) {
+            addEntryToPanel(entry, panel);
+        }
+    }
 }
 

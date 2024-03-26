@@ -18,7 +18,7 @@ With the development of society, more and more people rely on laptops to work an
 - As a **user**, I want to be able to clear all text content I entered if I don't want it.
 
 # *Instructions for Grader*
-- You can enter the date you want to add and the content of the entry in the date and content boxes on the Control panel
+- You can enter the date(dd/mm/yyyy format, ”/“ are impotent) you want to add and the content of the entry by type in the date and content in the boxes on the Control panel
 - You can then click Add Entry Button to complete the process of adding the entry to the date (multiple entries can be entered for one date).
 - You can receive feedback from the application when you open it, exit it, save it, reload it, and these feedbacks include images. the logo of the app located at the top of the application, the logo Universal Searcher logo located at top of the Universal Searcher panel.
 - You can save all current entries to a local json file by clicking on the Save Button in the Control panel.

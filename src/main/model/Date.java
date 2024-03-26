@@ -1,7 +1,7 @@
 package model;
 
 //Represents a date with day, month, and year components.
-public class Date {
+public class Date implements Comparable<Date> {
     private int day;
     private int month;
     private int year;
@@ -65,4 +65,16 @@ public class Date {
         Date date = (Date) obj;
         return day == date.day && month == date.month && year == date.year;
     }
+
+    @Override
+    public int compareTo(Date other) {
+        if (this.year != other.year) {
+            return this.year - other.year;
+        } else if (this.month != other.month) {
+            return this.month - other.month;
+        } else {
+            return this.day - other.day;
+        }
+    }
 }
+
