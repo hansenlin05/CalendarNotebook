@@ -8,13 +8,12 @@ import persistence.JsonWriter;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.util.Collections;
-import java.util.Comparator;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 // Represents a graphical user interface for interacting with a CalendarNotebook.
@@ -23,7 +22,6 @@ public class CalendarNotebookGUI extends JFrame {
     protected final JPanel entryPanel = new JPanel();
     private final JPanel controlPanel = new JPanel();
     private final JPanel searchResultPanel = new JPanel();
-    private JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
     private final JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
     private final JScrollPane searchScrollPanel = new JScrollPane(searchResultPanel);
     private final JScrollPane entryScrollPane = new JScrollPane(entryPanel);
@@ -64,6 +62,7 @@ public class CalendarNotebookGUI extends JFrame {
     JLabel topLabel9 = new JLabel("  Email: hansenlin05@foxmail.com");
     JLabel topLabel10 = new JLabel("  Instagram: hansenlin05");
     JLabel topLabel11 = new JLabel("©Hansen Lin. All Right Reserved");
+    private JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
     private CalendarNotebook notebook = new CalendarNotebook();
 
     // Constructs a new CalendarNotebookGUI and initializes the user interface.
@@ -91,8 +90,7 @@ public class CalendarNotebookGUI extends JFrame {
     private void setupFrameAndPanels() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1300, 800);
-        frame.setLayout(new GridLayout(1,4));
-
+        frame.setLayout(new GridLayout(1, 4));
 
 
         image1.setImage(image1.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
@@ -379,18 +377,7 @@ public class CalendarNotebookGUI extends JFrame {
             String query = searchField.getText();
             List<CalendarEntry> entries = notebook.searchEntries(query);
             searchResultPanel.removeAll();
-
-            // Show dialog if no entries found
-            if (!entries.isEmpty() && !searchField.getText().trim().isEmpty()) {
-
-                addEntriesToPanel(entries, searchResultPanel);
-                searchResultPanel.revalidate();
-                searchResultPanel.repaint();
-            }
-
-            for (CalendarEntry e1 : notebook.getEntries()) {
-                addEntryToPanel(e1, entryPanel);
-            }
+            refresh(entries);
             panel.revalidate();
             panel.repaint();
 
@@ -402,6 +389,23 @@ public class CalendarNotebookGUI extends JFrame {
         panel.add(entryDisplayPanel);
         panel.revalidate();
         panel.repaint();
+    }
+
+    // MODIFIES: this
+// EFFECTS: refresh search and entry panel after delete
+    private void refresh(List<CalendarEntry> entries) {
+
+        if (!entries.isEmpty() && !searchField.getText().trim().isEmpty()) {
+
+            addEntriesToPanel(entries, searchResultPanel);
+            searchResultPanel.revalidate();
+            searchResultPanel.repaint();
+        }
+
+        for (CalendarEntry e1 : notebook.getEntries()) {
+            addEntryToPanel(e1, entryPanel);
+        }
+
     }
 
     // MODIFIES: this
