@@ -61,7 +61,7 @@ public class CalendarNotebookGUI extends JFrame {
     JLabel topLabel8 = new JLabel("- To Report Error, Please Contact:");
     JLabel topLabel9 = new JLabel("  Email: hansenlin05@foxmail.com");
     JLabel topLabel10 = new JLabel("  Instagram: hansenlin05");
-    JLabel topLabel11 = new JLabel("Hansen Lin. All Right Reserved");
+    JLabel topLabel11 = new JLabel("UBC Hansen Lin. All Right Reserved");
     private JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
     private CalendarNotebook notebook = new CalendarNotebook();
 

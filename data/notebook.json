@@ -22,5 +22,11 @@
         "year": 1945,
         "day": 1,
         "content": "PRC First Day"
+    },
+    {
+        "month": 1,
+        "year": 1001,
+        "day": 1,
+        "content": "All story starts"
     }
 ]}
