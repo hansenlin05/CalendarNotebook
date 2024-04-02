@@ -66,6 +66,7 @@ public class Date implements Comparable<Date> {
         return day == date.day && month == date.month && year == date.year;
     }
 
+    //EFFECTS: Helper function when sorting entries by year/month/day
     @Override
     public int compareTo(Date other) {
         if (this.year != other.year) {

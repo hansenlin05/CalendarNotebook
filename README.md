@@ -26,4 +26,4 @@ With the development of society, more and more people rely on laptops to work an
 - You can retrieve relevant entries in the Notebook by typing the date or content in the universal searcher input box and clicking the Search button.
 - You can delete an entry from the notebook by clicking the delete button next to each entry.
 - You can click the Clear button to clear the date entry box, the content entry box, and the Universal searcher.
-- - You can click the Quit button to exit the App.
+- You can click the Quit button to exit the App.
