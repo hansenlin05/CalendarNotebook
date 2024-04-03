@@ -13,22 +13,28 @@ import java.util.List;
 //Represents a calendar notebook containing entries for various dates.
 public class CalendarNotebook implements Writable {
     private List<CalendarEntry> entries;
+    private EventLog eventLog = EventLog.getInstance();
 
     //Effects: Construct an Arraylist of Notebook entries
     public CalendarNotebook() {
         entries = new ArrayList<>();
+
     }
 
     // Modifies: This CalendarNotebook's entries.
     // Effects: Adds the specified entry to the notebook.
     public void addEntry(CalendarEntry entry) {
         entries.add(entry);
+        eventLog.logEvent(new Event("Entry: \"" + entry.getContent() + "\" added to " + entry.getDate()));
     }
 
     // Modifies: This CalendarNotebook's entries.
     // Effects: Removes the specified entry from the notebook.
     public void deleteEntry(CalendarEntry entry) {
         entries.remove(entry);
+        entries.remove(entry);
+        eventLog.logEvent(new Event("Entry: \"" + entry.getContent() + "\" removed from " + entry.getDate()));
+
     }
 
     // Requires: date != null.
@@ -64,11 +70,7 @@ public class CalendarNotebook implements Writable {
 
     // REQUIRES: none
 //      MODIFIES: none
-//      EFFECTS: Returns a JSONObject that represents this CalendarNotebook. The structure
-//              of the JSONObject would depend on the specific implementation of the
-//               CalendarNotebook class. For example, it could contain a single key "entries"
-//                      associated with a JSONArray, where each element of the JSONArray is a
-//JSONObject representing a CalendarEntry in this CalendarNotebook.
+//      EFFECTS: Returns a JSONObject that represents this CalendarNotebook. .
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -80,5 +82,13 @@ public class CalendarNotebook implements Writable {
         json.put("entries", entriesArray);
         return json;
 
+    }
+
+    public List<Event> getAllEvents() {
+        List<Event> events = new ArrayList<>();
+        for (Event event : eventLog) {
+            events.add(event);
+        }
+        return events;
     }
 }

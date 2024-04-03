@@ -3,6 +3,8 @@ package ui;
 import model.CalendarEntry;
 import model.CalendarNotebook;
 import model.Date;
+import model.Event;
+import model.EventLog;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -64,6 +66,8 @@ public class CalendarNotebookGUI extends JFrame {
     JLabel topLabel11 = new JLabel("UBC Hansen Lin. All Right Reserved");
     private JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
     private CalendarNotebook notebook = new CalendarNotebook();
+
+
 
     // Constructs a new CalendarNotebookGUI and initializes the user interface.
     public CalendarNotebookGUI() {
@@ -227,12 +231,14 @@ public class CalendarNotebookGUI extends JFrame {
     private void quitComfirm(int option) {
         if (option == JOptionPane.YES_OPTION) {
             saveNotebook();
+            displayAllEvents();
             image7.setImage(image7.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
             JOptionPane.showMessageDialog(frame,
                     "Bye, I'll be lonely for while. Remember to come and play with me!",
                     "The App Say Good Bye to you", JOptionPane.WARNING_MESSAGE, image7);
             System.exit(0);
         } else if (option == JOptionPane.NO_OPTION) {
+            displayAllEvents();
             image4.setImage(image4.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
             JOptionPane.showMessageDialog(frame, "You Lost all data since Last Save!",
                     "The App mocked you", JOptionPane.WARNING_MESSAGE, image4);
@@ -344,9 +350,6 @@ public class CalendarNotebookGUI extends JFrame {
         try {
             notebook = jsonReader.read();
             entryPanel.removeAll();
-//            for (CalendarEntry entry : notebook.getEntries()) {
-//                addEntryToPanel(entry, entryPanel);
-//            }
             addEntriesToPanel(notebook.getEntries(), entryPanel);
             entryPanel.revalidate();
             entryPanel.repaint();
@@ -422,5 +425,23 @@ public class CalendarNotebookGUI extends JFrame {
             addEntryToPanel(entry, panel);
         }
     }
+
+
+    // Displays all events in a JOptionPane
+    private void displayAllEvents() {
+        List<Event> events = notebook.getAllEvents();
+        StringBuilder eventsStr = new StringBuilder();
+        System.out.println("Event Log:");
+        for (Event event : events) {
+            eventsStr.append(event).append("\n");
+            System.out.println(event.toString() + "\n");
+        }
+
+        JOptionPane.showMessageDialog(this, eventsStr.toString());
+    }
 }
+
+
+
+
 
