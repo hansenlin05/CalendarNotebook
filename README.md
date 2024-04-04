@@ -32,7 +32,7 @@ With the development of society, more and more people rely on laptops to work an
 Event Log:
 Event Log:
 Wed Apr 03 00:39:26 PDT 2024<br>
-Entry: "human officially extinct" added to 31/12/3099<br>
+Entry: "human officially extinct" added to 31/12/3099<br>~~~~
 
 Wed Apr 03 00:39:46 PDT 2024<br>
 Entry: "12/12/2022" added to 12/12/2022<br>

@@ -313,7 +313,6 @@ public class CalendarNotebookGUI extends JFrame {
         List<CalendarEntry> entries = notebook.searchEntries(query);
         searchResultPanel.removeAll();
 
-        // Show dialog if no entries found
         if (!entries.isEmpty() && !searchField.getText().trim().isEmpty()) {
 
             addEntriesToPanel(entries, searchResultPanel);

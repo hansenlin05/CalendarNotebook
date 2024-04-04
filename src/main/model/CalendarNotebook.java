@@ -25,14 +25,14 @@ public class CalendarNotebook implements Writable {
     // Effects: Adds the specified entry to the notebook.
     public void addEntry(CalendarEntry entry) {
         entries.add(entry);
-        eventLog.logEvent(new Event("Entry: \"" + entry.getContent() + "\" added to " + entry.getDate()));
+        eventLog.logEvent(new Event("Entry \"" + entry.getContent() + "\" added to " + entry.getDate()));
     }
 
     // Modifies: This CalendarNotebook's entries.
     // Effects: Removes the specified entry from the notebook.
     public void deleteEntry(CalendarEntry entry) {
         entries.remove(entry);
-        eventLog.logEvent(new Event("Entry: \"" + entry.getContent() + "\" removed from " + entry.getDate()));
+        eventLog.logEvent(new Event("Entry \"" + entry.getContent() + "\" removed from " + entry.getDate()));
 
     }
 
@@ -64,7 +64,9 @@ public class CalendarNotebook implements Writable {
                 results.add(entry);
             }
         }
+        eventLog.logEvent(new Event("Searched for \"" + query + "\" and found " + results.size() + " entries."));
         return results;
+
     }
 
     // REQUIRES: none
