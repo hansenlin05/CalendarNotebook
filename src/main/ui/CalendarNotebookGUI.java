@@ -4,7 +4,6 @@ import model.CalendarEntry;
 import model.CalendarNotebook;
 import model.Date;
 import model.Event;
-import model.EventLog;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -66,7 +65,6 @@ public class CalendarNotebookGUI extends JFrame {
     JLabel topLabel11 = new JLabel("UBC Hansen Lin. All Right Reserved");
     private JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
     private CalendarNotebook notebook = new CalendarNotebook();
-
 
 
     // Constructs a new CalendarNotebookGUI and initializes the user interface.
@@ -424,8 +422,8 @@ public class CalendarNotebookGUI extends JFrame {
         }
     }
 
-
-    // Displays all events in a JOptionPane
+    // MODIFIES: this
+// EFFECTS:  Displays all events in a JOptionPane
     private void displayAllEvents() {
         List<Event> events = notebook.getAllEvents();
         StringBuilder eventsStr = new StringBuilder();
