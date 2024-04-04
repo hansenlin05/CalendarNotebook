@@ -28,20 +28,27 @@ With the development of society, more and more people rely on laptops to work an
 - You can click the Clear button to clear the date entry box, the content entry box, and the Universal searcher.
 - You can click the Quit button to exit the App.
 
-# * Phase 4: Task 2
+# *Phase 4: Task 2*
 Event Log:
 Event Log:
-Wed Apr 03 00:39:26 PDT 2024
-Entry: "human officially extinct" added to 31/12/3099
+Wed Apr 03 00:39:26 PDT 2024<br>
+Entry: "human officially extinct" added to 31/12/3099<br>
 
-Wed Apr 03 00:39:46 PDT 2024
-Entry: "12/12/2022" added to 12/12/2022
+Wed Apr 03 00:39:46 PDT 2024<br>
+Entry: "12/12/2022" added to 12/12/2022<br>
 
-Wed Apr 03 00:49:31 PDT 2024
+Wed Apr 03 00:49:31 PDT 2024<br>
 Entry: "9999999" added to 12/12/2022
 
-Wed Apr 03 01:07:36 PDT 2024
+Wed Apr 03 01:07:36 PDT 2024<br>
 Entry: "12/12/2022" removed from 12/12/2022
 
 This shows a sample event log when you log out of My Calendar notepad. It shows logs being added and deleted. 
 If the user chooses to load the local file, then all entries in the file are added at the same second.
+![UML_Design_Diagram.png](UML_Design_Diagram.png)
+
+# *Phase 4: Task 3*
+Looking back at my project, I think I handled cohesion and coupling well in the design. I think that if I were to
+refactor my code, I would like to create methods to consolidate duplicate code and fragmented code in the GUI (new ideas 
+are always randomly appearing, resulting in an uneven distribution), thus refactoring my application and making it easier
+to read and maintain for future.

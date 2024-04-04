@@ -96,7 +96,6 @@ public class CalendarNotebookGUI extends JFrame {
         frame.setSize(1300, 800);
         frame.setLayout(new GridLayout(1, 4));
 
-
         image1.setImage(image1.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
 
         frame.add(topPanel, BorderLayout.NORTH);

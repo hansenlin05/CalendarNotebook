@@ -32,7 +32,6 @@ public class CalendarNotebook implements Writable {
     // Effects: Removes the specified entry from the notebook.
     public void deleteEntry(CalendarEntry entry) {
         entries.remove(entry);
-        entries.remove(entry);
         eventLog.logEvent(new Event("Entry: \"" + entry.getContent() + "\" removed from " + entry.getDate()));
 
     }
@@ -84,6 +83,9 @@ public class CalendarNotebook implements Writable {
 
     }
 
+    // REQUIRES: none
+//      MODIFIES: none
+//      EFFECTS: Returns all LogEvents since CalendarNotebook opens .
     public List<Event> getAllEvents() {
         List<Event> events = new ArrayList<>();
         for (Event event : eventLog) {

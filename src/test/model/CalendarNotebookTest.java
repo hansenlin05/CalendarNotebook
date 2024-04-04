@@ -53,8 +53,8 @@ public class CalendarNotebookTest {
 
         assertEquals(1, entriesForDate1.size());
         assertEquals(1, entriesForDate2.size());
-        assertEquals("Meeting", entriesForDate1.get(0).getContent()); // Using toString for simplicity
-        assertEquals("Appointment", entriesForDate2.get(0).getContent()); // Using toString for simplicity
+        assertEquals("Meeting", entriesForDate1.get(0).getContent());
+        assertEquals("Appointment", entriesForDate2.get(0).getContent());
     }
 
     @Test
