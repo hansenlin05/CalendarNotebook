@@ -1,4 +1,4 @@
-# Calendar Notepad Project
+# Calendar Notebook Project
 
 ## *Proposal*
 The application is a Java-based application of the calendar notebook, calendar notebook with basic browsing and date modification functions . The notebook has basic functions such as input, save, delete, view and so on.
@@ -30,21 +30,32 @@ With the development of society, more and more people rely on laptops to work an
 
 # *Phase 4: Task 2*
 Event Log:
-Event Log:
-Wed Apr 03 00:39:26 PDT 2024<br>
-Entry: "human officially extinct" added to 31/12/3099<br>~~~~
+Fri Apr 05 00:08:19 PDT 2024
+Entry "United States of America First Day" added to 3/9/1783
 
-Wed Apr 03 00:39:46 PDT 2024<br>
-Entry: "12/12/2022" added to 12/12/2022<br>
+Fri Apr 05 00:08:50 PDT 2024
+Entry "66666666" added to 5/4/2024
 
-Wed Apr 03 00:49:31 PDT 2024<br>
-Entry: "9999999" added to 12/12/2022
+Fri Apr 05 00:08:54 PDT 2024
+Entry "66666666" deleted from 5/4/2024
 
-Wed Apr 03 01:07:36 PDT 2024<br>
-Entry: "12/12/2022" removed from 12/12/2022
+Fri Apr 05 00:08:54 PDT 2024
+Searched for "" and found 5 entries.
 
-This shows a sample event log when you log out of My Calendar notepad. It shows logs being added and deleted. 
+Fri Apr 05 00:09:00 PDT 2024
+Searched for "666" and found 0 entries.
+
+Fri Apr 05 00:09:15 PDT 2024
+Searched for "all" and found 1 entries.
+
+
+Process finished with exit code 0
+
+
+This shows a sample event log when you log out of My Calendar Notebook App. It shows logs being added and deleted, and when you use Universal Searcher. 
 If the user chooses to load the local file, then all entries in the file are added at the same second.
+When a user deletes an entry the Universal Searcher will re-search the entry to achieve full synchronisation, so something like Fri Apr 05 00:08:54 PDT 2024
+Searched for "" and found 5 entries will appear.
 ![UML_Design_Diagram.png](UML_Design_Diagram.png)
 
 # *Phase 4: Task 3*

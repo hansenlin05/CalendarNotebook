@@ -228,17 +228,17 @@ public class CalendarNotebookGUI extends JFrame {
     private void quitComfirm(int option) {
         if (option == JOptionPane.YES_OPTION) {
             saveNotebook();
-            displayAllEvents();
             image7.setImage(image7.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
             JOptionPane.showMessageDialog(frame,
                     "Bye, I'll be lonely for while. Remember to come and play with me!",
                     "The App Say Good Bye to you", JOptionPane.WARNING_MESSAGE, image7);
+            displayAllEvents();
             System.exit(0);
         } else if (option == JOptionPane.NO_OPTION) {
-            displayAllEvents();
             image4.setImage(image4.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
             JOptionPane.showMessageDialog(frame, "You Lost all data since Last Save!",
                     "The App mocked you", JOptionPane.WARNING_MESSAGE, image4);
+            displayAllEvents();
             System.exit(0);
         } else {
             image5.setImage(image5.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
@@ -393,7 +393,6 @@ public class CalendarNotebookGUI extends JFrame {
     private void refresh(List<CalendarEntry> entries) {
 
         if (!entries.isEmpty() && !searchField.getText().trim().isEmpty()) {
-
             addEntriesToPanel(entries, searchResultPanel);
             searchResultPanel.revalidate();
             searchResultPanel.repaint();
